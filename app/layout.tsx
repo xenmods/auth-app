@@ -10,8 +10,8 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Auth App',
-  description: 'Test Authentication Application!',
+  title: 'Sticky',
+  description: 'A Markdown Editor.',
 }
 
 export default function RootLayout({
@@ -25,7 +25,7 @@ export default function RootLayout({
       <body className={inter.className}>
       <ThemeProvider
             attribute="class"
-            defaultTheme="system"
+            defaultTheme="dark"
             enableSystem
             storageKey="theme"
           >{children}

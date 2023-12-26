@@ -1,9 +1,7 @@
 'use client';
 
 import { Editor as NovelEditor } from "novel-without-ai";
-import Document from "@tiptap/extension-document";
 import Heading from "@tiptap/extension-heading";
-import Placeholder from "@tiptap/extension-placeholder";
 import { useUser } from '@clerk/nextjs';
 import { useEffect, useState } from "react";
 
@@ -55,8 +53,8 @@ export default function Results() {
                 }),
             }).then((response) => response.json())
             .then((data) => {
+                data = data.reverse();
                 setStickies(data);
-                console.log(data);
             })
         } else {
             setStickies([]);
@@ -75,16 +73,6 @@ export default function Results() {
     <span className="bar"></span>
     <span className="bar"></span>
 </div>
-          {/* <div className="flex items-center justify-center h-20 w-20 rounded-full">
-            <div
-            className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite] mx-auto"
-            role="status"
-          >
-            <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
-              Loading...
-            </span>
-          </div>
-          </div> */}
         </div>
       ) : null}
                 {loading || firstLoad ? (
@@ -94,16 +82,6 @@ export default function Results() {
     <span className="bar"></span>
     <span className="bar"></span>
 </div>
-                        {/* <div className="flex items-center justify-center h-20 w-20 rounded-full">
-                            <div
-                                className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite] mx-auto"
-                                role="status"
-                            >
-                                <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
-                                    Loading...
-                                </span>
-                            </div>
-                        </div> */}
                     </div>
                 ) : stickies.length === 0 ? (
                     <div className="flex items-center justify-center w-full mt-8">
@@ -111,24 +89,25 @@ export default function Results() {
                     </div>
                 ) : (
                     <div className="flex items-center justify-center w-full mt-8">
-                        <h1 className="text-2xl font-semibold">Your Stickies</h1>
+                        <h1 className="text-3xl text-transparent bg-clip-text bg-gradient-to-br from-gray-300 to-white font-semibold hover:bg-white">Your Stickies</h1>
                     </div>
                 )}
                 {loading ? null :
                 <div className="mt-5 mx-2 grid grid-cols-1 gap-2 overflow-hidden py-3 sm:grid-cols-2 md:grid-cols-3">
                     {stickies.map((sticky) => {
                         return (
-                            <div className="relative space-y-2 w-full h-[220px] rounded-2xl bg-black/30 overflow-hidden backdrop-blur-md hover:bg-black transition-all ease-in-out">
-                            <a href={`/${sticky.id}`} key={sticky}  style={{zoom: '70%'}}>
-                                <NovelEditor
-                                    className="rounded-2xl"
-                                    disableLocalStorage
-                                    defaultValue={JSON.parse(sticky.content)}
-                                />
-                                
-                                {firstLoad === true ? setFirstLoad(false) : null}
-                            </a>
-                                {/* <p className="shadow-2xl mb-3 absolute bottom-0 m-3">{ formatDateWithZero(sticky.createdAt) }</p> */}
+                            <div className="relative space-y-2 w-full h-[220px] rounded-2xl bg-black/80 overflow-hidden backdrop-blur-md hover:bg-black border border-sm border-gray-500/80 shadow-lg transition-all ease-in-out">
+                                <a href={`/${sticky.id}`} className="absolute inset-0 bg-transparent z-10"></a>
+                                <div key={sticky} style={{ zoom: '70%' }}>
+                                    <NovelEditor
+                                        className="rounded-2xl"
+                                        extensions={[Heading.configure({ HTMLAttributes: { className: "text-transparent bg-clip-text bg-gradient-to-br from-gray-300 to-white font-semibold" } })]}
+                                        disableLocalStorage
+                                        defaultValue={JSON.parse(sticky.content)}
+                                    />
+
+                                    {firstLoad === true ? setFirstLoad(false) : null}
+                                </div>
                             </div>
                         );
                     })}

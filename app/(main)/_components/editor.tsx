@@ -13,11 +13,12 @@ import { useState } from "react";
 const Title = Heading.extend({
   name: "heading",
   group: "heading",
-  parseHTML: () => [{ tag: "h1:first-child" }],
+  parseHTML: () => [{ tag: "h1:first-child", className: "text-transparent bg-clip-text bg-gradient-to-br from-gray-300 to-white" }],
+  renderHTML: () => ["h1", { class: "text-transparent bg-clip-text bg-gradient-to-br from-gray-300 to-white" }],
 }).configure({ levels: [1] });
 
 const DocumentWithTitle = Document.extend({
-  content: "heading block+",
+  content: "heading block+ ",
 });
 
 function hasHeading(obj) {
@@ -72,16 +73,6 @@ export default function Editor() {
     <span className="bar"></span>
     <span className="bar"></span>
 </div>
-          {/* <div className="flex items-center justify-center h-20 w-20 rounded-full">
-            <div
-            className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite] mx-auto"
-            role="status"
-          >
-            <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
-              Loading...
-            </span>
-          </div>
-          </div> */}
         </div>
       ) : null}
     <div className="relative w-full max-w-screen-lg">
@@ -89,17 +80,16 @@ export default function Editor() {
         <Share className="h-4 w-4 mr-1"/> Share
       </button>
       <NovelEditor
-        className="w-full h-screen mt-5"
+        className="w-full h-screen mt-5 "
         storageKey="sticky_content"
         defaultValue={ defaultEditorContent }
-        extensions={[DocumentWithTitle, Placeholder.configure({
+        extensions={[DocumentWithTitle, Heading.configure({HTMLAttributes: {class: "text-transparent bg-clip-text bg-gradient-to-br from-gray-300 to-white font-semibold"}}), Placeholder.configure({
           showOnlyCurrent: false,
           placeholder: ({ node }) => {
             if (node.type.name === "heading") {
               return "What's the title?";
             }
   
-            return "What's the content?";
           },
         })]}
       />
