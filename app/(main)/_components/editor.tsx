@@ -67,8 +67,12 @@ export default function Editor() {
     <div className="w-full max-w-screen-lg">
       {processing ? (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 backdrop-blur-md">
-          <div className="flex items-center justify-center h-20 w-20 rounded-full">
-            {/* <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-primary"></div> */}
+          <div className="loader">
+    <span className="bar"></span>
+    <span className="bar"></span>
+    <span className="bar"></span>
+</div>
+          {/* <div className="flex items-center justify-center h-20 w-20 rounded-full">
             <div
             className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite] mx-auto"
             role="status"
@@ -77,7 +81,7 @@ export default function Editor() {
               Loading...
             </span>
           </div>
-          </div>
+          </div> */}
         </div>
       ) : null}
     <div className="relative w-full max-w-screen-lg">
@@ -88,7 +92,7 @@ export default function Editor() {
         className="w-full h-screen mt-5"
         storageKey="sticky_content"
         defaultValue={ defaultEditorContent }
-        extensions={[DocumentWithTitle, Title, Placeholder.configure({
+        extensions={[DocumentWithTitle, Placeholder.configure({
           showOnlyCurrent: false,
           placeholder: ({ node }) => {
             if (node.type.name === "heading") {

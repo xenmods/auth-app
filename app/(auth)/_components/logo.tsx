@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Poppins } from "next/font/google";
-import { Fingerprint } from "lucide-react";
+import { StickyNote } from "lucide-react";
 
 const font = Poppins({
     subsets: ["latin"],
@@ -10,17 +10,17 @@ const font = Poppins({
 function Logo() {
     return ( <div className="flex flex-col items-center gap-y-4">
     <div className="rounded-full p-1">
-    <Fingerprint className="w-[80px] h-[80px] fill-black" />
+    <StickyNote className="w-[80px] h-[80px]" />
     </div>
     <div className={cn(
       "flex flex-col items-center",
       font.className,
     )}>
       <p className="text-xl font-semibold">
-        Test Authentication
+        Sticky
       </p>
       <p className="text-sm text-muted-foreground">
-        By @xenmods
+        A Markdown Editor
       </p>
     </div>
   </div> );

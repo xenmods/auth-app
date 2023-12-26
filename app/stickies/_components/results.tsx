@@ -70,7 +70,12 @@ export default function Results() {
             <div>
             {loading ? (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 backdrop-blur-md">
-          <div className="flex items-center justify-center h-20 w-20 rounded-full">
+            <div className="loader">
+    <span className="bar"></span>
+    <span className="bar"></span>
+    <span className="bar"></span>
+</div>
+          {/* <div className="flex items-center justify-center h-20 w-20 rounded-full">
             <div
             className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite] mx-auto"
             role="status"
@@ -79,12 +84,17 @@ export default function Results() {
               Loading...
             </span>
           </div>
-          </div>
+          </div> */}
         </div>
       ) : null}
                 {loading || firstLoad ? (
                     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 backdrop-blur-md">
-                        <div className="flex items-center justify-center h-20 w-20 rounded-full">
+                        <div className="loader">
+    <span className="bar"></span>
+    <span className="bar"></span>
+    <span className="bar"></span>
+</div>
+                        {/* <div className="flex items-center justify-center h-20 w-20 rounded-full">
                             <div
                                 className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite] mx-auto"
                                 role="status"
@@ -93,7 +103,7 @@ export default function Results() {
                                     Loading...
                                 </span>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 ) : stickies.length === 0 ? (
                     <div className="flex items-center justify-center w-full mt-8">
