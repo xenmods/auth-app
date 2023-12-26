@@ -1,0 +1,23 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Pastes {
+  id        String      @id @default(uuid())
+  // userId will be "anonymous" if the user is not logged in
+  userId    String
+  // title will be AI generated 
+  title     String
+  content   String @db.Text
+  // edit code will be randomly generated if not logged in, else it will be the same as the userId
+  editCode  String
+  createdAt DateTime @default(now())
+}

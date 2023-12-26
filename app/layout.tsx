@@ -5,6 +5,8 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { Inter } from 'next/font/google'
 import './globals.css'
 
+
+
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -18,14 +20,14 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <ClerkProvider appearance={{ baseTheme: dark }}>
+    <ClerkProvider appearance={ {baseTheme: dark} }>
     <html lang="en">
       <body className={inter.className}>
       <ThemeProvider
             attribute="class"
             defaultTheme="system"
             enableSystem
-            disableTransitionOnChange
+            storageKey="theme"
           >{children}
           </ThemeProvider></body>
     </html>
